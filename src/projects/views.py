@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db.models import Avg
-from register.models import Project, Task
+from register.models import Project
+from projects.models import Task
 from projects.forms import TaskRegistrationForm, ProjectRegistrationForm
 
 # Create your views here.
