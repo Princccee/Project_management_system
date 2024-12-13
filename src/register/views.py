@@ -46,28 +46,46 @@ def user_view(request, profile_id):
     }
     return render(request, 'register/user.html', context)
 
+# def profile(request):
+#     if request.method == 'POST':
+#         img_form = ProfilePictureForm(request.POST, request.FILES)
+#         print('PRINT 1: ', img_form)
+#         context = {'img_form' : img_form }
+#         if img_form.is_valid():
+#             img_form.save(request)
+#             updated = True
+#             context = {
+#                 'img_form' : img_form,
+#                 'updated' : updated,
+#                 'profile_id': request.user.userprofile.id,  # Pass the user's profile ID
+#              }
+#             return render(request, 'register/profile.html', context)
+#         else:
+#             return render(request, 'register/profile.html', context)
+#     else:
+#         img_form = ProfilePictureForm()
+#         context = {
+#             'img_form' : img_form,
+#             'profile_id': request.user.userprofile.id,  # Pass the user's profile ID
+#         }
+#         return render(request, 'register/profile.html', context)
+
 def profile(request):
     if request.method == 'POST':
         img_form = ProfilePictureForm(request.POST, request.FILES)
-        print('PRINT 1: ', img_form)
-        context = {'img_form' : img_form }
+        logged_user = get_active_profile(request)  # Retrieve the active profile
+        context = {'img_form': img_form, 'logged_user': logged_user}
         if img_form.is_valid():
             img_form.save(request)
             updated = True
-            context = {
-                'img_form' : img_form,
-                'updated' : updated,
-                'profile_id': request.user.userprofile.id,  # Pass the user's profile ID
-             }
+            context.update({'updated': updated})
             return render(request, 'register/profile.html', context)
         else:
             return render(request, 'register/profile.html', context)
     else:
         img_form = ProfilePictureForm()
-        context = {
-            'img_form' : img_form,
-            'profile_id': request.user.userprofile.id,  # Pass the user's profile ID
-        }
+        logged_user = get_active_profile(request)  # Retrieve the active profile
+        context = {'img_form': img_form, 'logged_user': logged_user}
         return render(request, 'register/profile.html', context)
 
 
