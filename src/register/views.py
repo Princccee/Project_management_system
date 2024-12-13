@@ -54,13 +54,20 @@ def profile(request):
         if img_form.is_valid():
             img_form.save(request)
             updated = True
-            context = {'img_form' : img_form, 'updated' : updated }
+            context = {
+                'img_form' : img_form,
+                'updated' : updated,
+                'profile_id': request.user.userprofile.id,  # Pass the user's profile ID
+             }
             return render(request, 'register/profile.html', context)
         else:
             return render(request, 'register/profile.html', context)
     else:
         img_form = ProfilePictureForm()
-        context = {'img_form' : img_form }
+        context = {
+            'img_form' : img_form,
+            'profile_id': request.user.userprofile.id,  # Pass the user's profile ID
+        }
         return render(request, 'register/profile.html', context)
 
 
