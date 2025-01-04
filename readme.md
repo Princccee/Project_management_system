@@ -11,6 +11,7 @@ This Project Management System is designed to help teams/organistaions to plan, 
 - User authentication and roles
 
 ## Installation
+![Project Management System](home_page.png)
 To install and run the project locally, follow these steps:
 
 1. Clone the repository in a folder say Project_manager:
